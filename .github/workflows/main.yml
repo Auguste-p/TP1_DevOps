@@ -19,8 +19,8 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install Python dependencies
-        run: pip install black flake8 safety
+      - name: Install Python linters
+        run: pip install black flake8
 
       - name: Run linters
         id: run-linters
@@ -28,11 +28,14 @@ jobs:
         with:
           black: true
           flake8: true
-          safety: true
+
+      -name: Run safety
+        id: run-safety
+        run: pip install safety && safety check
 
   docker-buildx:
     name: Docker Buildx
-    needs: run-linters
+    needs: run-linters && run-safety
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,7 +55,7 @@ jobs:
 
   packer:
     name: Packer
-    needs: run-linters
+    needs: run-linters && run-safety
     runs-on: ubuntu-latest
     steps:
       - name: Run `packer init`

@@ -20,18 +20,3 @@
     - name: "Installation de flask"
       ansible.builtin.pip:
         name: flask
-
-    - name: "Expose port 80"
-      docker_container:
-        name: voting-app
-        image: python:3.8
-        ports: 80:80
-        become: true
-
-    - name: "Build and run Redis container"
-      docker_container:
-        name: redis
-        image: redis:latest
-        command: redis-server
-        ports: 6379:6379
-        become: true
