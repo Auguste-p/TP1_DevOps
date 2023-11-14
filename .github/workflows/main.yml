@@ -47,15 +47,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      #  - name: Docker Scout
-      #     id: docker-scout
-      #     uses: docker/scout-action@v1
-      #     with:
-      #       command: cves,recommendations
-      #       to-latest: true
-      #       ignore-base: true
-      #       ignore-unchanged: true
-      #       only-fixed: true
+       - name: Docker Scout
+          id: docker-scout
+          uses: docker/scout-action@v1
+          with:
+            command: quickview
 
       # - name: Build and push
       #   uses: docker/build-push-action@v4
