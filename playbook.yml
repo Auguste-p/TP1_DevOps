@@ -1,35 +1,26 @@
 - name: Provision Python
   hosts: all
   tasks:
-    - name: Boostrap python
+    - name: "Installation de boostrap python"
       raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3 python3-pip python3-apt)
 
-- name: "[SETUP] Installation de toutes les dépendances"
-  hosts: all
-  tasks:
+    - name: "Installation de redis"
+      ansible.builtin.pip:
+        name: redis
 
-  - name: "Installation de redis"
-    ansible.builtin.pip:
-      name: redis
+    - name: "Installation de requests"
+      ansible.builtin.pip:
+        name: requests
 
-  - name: "Installation de requests"
-    ansible.builtin.pip:
-      name: requests
+    - name: "Installation de flask"
+      ansible.builtin.pip:
+        name: flask
 
-  - name: "Installation de flask"
-    ansible.builtin.pip:
-      name: flask
+    - name: "Installation de flake8"
+      ansible.builtin.pip:
+        name: flake8
 
-  - name: "Installation de flake8"
-    ansible.builtin.pip:
-      name: flake8
-
-  - name: "Add index.html"
-    copy:
-      src: index.html
-      dest: /usr/share/nginx/html/index.html
-
-  - name: "Clonage du repo pour récupérer le voting-app"
-    ansible.builtin.git:
-      repo: https://github.com/nomaddevops/voting-app.git
-      dest: /Users/auguste/Documents/GitHub
+    - name: "Clonage du repo pour récupérer le voting-app"
+      ansible.builtin.git:
+        repo: https://github.com/nomaddevops/voting-app.git
+        dest: /Users/auguste/Documents/GitHub
