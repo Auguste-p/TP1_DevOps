@@ -53,8 +53,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}-${{ github.event.repository.name }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
 
       - name: Docker Scout
         id: docker-scout
-        run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}-${{ github.event.repository.name }}
+        run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
