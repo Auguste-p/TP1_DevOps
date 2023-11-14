@@ -49,7 +49,7 @@ jobs:
 
       - name: Docker Scout
         id: docker-scout
-        run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+        run: docker scout
 
       # - name: Build and push
       #   uses: docker/build-push-action@v4
