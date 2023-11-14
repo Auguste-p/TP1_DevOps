@@ -7,7 +7,6 @@ on:
 
 jobs:
   run-linters:
-    id: run-linters
     name: Run linters
     runs-on: ubuntu-latest
 
@@ -24,13 +23,13 @@ jobs:
         run: pip install black flake8
 
       - name: Run linters
+        id: run-linters
         uses: wearerequired/lint-action@v2
         with:
           black: true
           flake8: true
 
   run-safety:
-    id: run-safety
     name: Run safety
     runs-on: ubuntu-latest
     steps:
@@ -43,11 +42,12 @@ jobs:
           python-version: 3.8
 
       - name: Install safety
+        id: run-safety
         run: pip install safety && safety check
 
   docker-buildx:
     name: Docker Buildx
-    needs: run-linters && run-safety
+    needs: run-linters
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -67,7 +67,7 @@ jobs:
 
   packer:
     name: Packer
-    needs: run-linters && run-safety
+    needs: run-linters
     runs-on: ubuntu-latest
     steps:
       - name: Run `packer init`
