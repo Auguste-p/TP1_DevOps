@@ -72,5 +72,3 @@ jobs:
       - name: Run `packer build`
         id: build
         run: "packer build ./docker-ubuntu.pkr.hcl"
-
-```
