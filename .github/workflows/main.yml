@@ -6,6 +6,28 @@ on:
             - main
 
 jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install Python dependencies
+        run: pip install black flake8
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          black: true
+          flake8: true
+          
   ReleaseBuildPush:
     name: Release
     runs-on: ubuntu-latest
@@ -31,8 +53,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }} ubuntu
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
 
-      # - name: Docker Scout
-      #   id: docker-scout
-      #   run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+      - name: Docker Scout
+        id: docker-scout
+        run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest

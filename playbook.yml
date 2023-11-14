@@ -23,4 +23,4 @@
     - name: "Clonage du repo pour récupérer le voting-app"
       ansible.builtin.git:
         repo: https://github.com/nomaddevops/voting-app.git
-        dest: /Users/auguste/Documents/GitHub/TP_note
+        dest: /Users/auguste/Documents/GitHub/TP_notep
