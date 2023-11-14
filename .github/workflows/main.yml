@@ -8,6 +8,7 @@ on:
 jobs:
   run-linters:
     name: Run linters
+    id: run-linters
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +32,7 @@ jobs:
 
   ReleaseBuildPush:
     name: Release
+    needs: run-linters
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -56,19 +58,19 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
 
-  if: ${{ jobs.run-linters.outcome == 'success' }}
-  packer:
-    runs-on: ubuntu-latest
-    name: Run Packer
-    steps:
-      - name: Run `packer init`
-        id: init
-        run: "packer init ./docker-ubuntu.pkr.hcl"
+  # if: ${{ jobs.run-linters.outcome == 'success' }}
+  # packer:
+  #   runs-on: ubuntu-latest
+  #   name: Run Packer
+  #   steps:
+  #     - name: Run `packer init`
+  #       id: init
+  #       run: "packer init ./docker-ubuntu.pkr.hcl"
 
-      - name: Run `packer validate`
-        id: validate
-        run: "packer validate ./docker-ubuntu.pkr.hcl"
+  #     - name: Run `packer validate`
+  #       id: validate
+  #       run: "packer validate ./docker-ubuntu.pkr.hcl"
 
-      - name: Run `packer build`
-        id: build
-        run: "packer build ./docker-ubuntu.pkr.hcl"
+  #     - name: Run `packer build`
+  #       id: build
+  #       run: "packer build ./docker-ubuntu.pkr.hcl"
