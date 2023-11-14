@@ -20,6 +20,12 @@
     - name: "Installation de flask"
       ansible.builtin.pip:
         name: flask
+    
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /app
+        state: directory
+        mode: '0755'
 
     - name: Copie des fichiers docker et playbook dans le container
       ansible.builtin.copy:
