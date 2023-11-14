@@ -72,6 +72,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     name: Run Docker (build and push)
+    needs: [run-linters, run-safety] 
     steps:
       -
         name: Set up QEMU
