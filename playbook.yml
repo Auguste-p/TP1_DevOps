@@ -4,6 +4,17 @@
     - name: "Installation de boostrap python"
       raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3 python3-pip python3-apt)
 
+    - name: Création du dossier accueillant les sources
+      ansible.builtin.file:
+        path: /app
+        state: directory
+        mode: '0755'
+
+    - name: Copie des fichiers docker et playbook dans le container
+      ansible.builtin.copy:
+        src: ./
+        dest: /app
+
     - name: "Clonage du repo pour récupérer le voting-app"
       ansible.builtin.git:
         repo: https://github.com/nomaddevops/voting-app.git

@@ -76,19 +76,32 @@ jobs:
   #     - name: Create folder
   #       run: mkdir /app && cp ../ /app
 
+  # packer:
+  #   name: Packer
+  #   needs: [run-linters, run-safety] 
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Run packer init
+  #       id: init
+  #       run: ls -la /home/runner/work/_temp/github_workflow && packer init ..
+
   packer:
-    name: Packer
-    needs: [run-linters, run-safety] 
     runs-on: ubuntu-latest
+    name: Run Packer
     steps:
-      - name: Run packer init
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: ${{ env.PRODUCT_VERSION }}
+
+      - name: Run `packer init`
         id: init
-        run: ls -la /home/runner/work/_temp/github_workflow && packer init ..
+        run: "packer init ./docker-ubuntu.pkr.hcl"
 
-      # - name: Run packer validate
-      #   id: validate
-      #   run: packer validate ..
-
-      # - name: Run packer build
-      #   id: build
-      #   run: packer build ..
+      - name: Run `packer validate`
+        id: validate
+        run: "packer validate ./docker-ubuntu.pkr.hcl"
