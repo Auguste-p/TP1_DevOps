@@ -4,6 +4,18 @@
     - name: "Installation de boostrap python"
       raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3 python3-pip python3-apt)
 
+    - name: "Clonage du repo pour récupérer le voting-app"
+      ansible.builtin.git:
+        repo: https://github.com/nomaddevops/voting-app.git
+        dest: /app
+
+    - name: "Expose port 80"
+      docker_container:
+        name: voting-app
+        image: python:3.8
+        ports: 80:80
+        become: true
+
     - name: "Installation de redis"
       ansible.builtin.pip:
         name: redis
@@ -16,7 +28,10 @@
       ansible.builtin.pip:
         name: flask
 
-    - name: "Clonage du repo pour récupérer le voting-app"
-      ansible.builtin.git:
-        repo: https://github.com/nomaddevops/voting-app.git
-        dest: /app
+    - name: "Build and run Redis container"
+      docker_container:
+        name: redis
+        image: redis:latest
+        command: redis-server
+        ports: 6379:6379
+        become: true
