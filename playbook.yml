@@ -16,10 +16,6 @@
       ansible.builtin.pip:
         name: flask
 
-    - name: "Installation de flake8"
-      ansible.builtin.pip:
-        name: flake8
-
     - name: "Clonage du repo pour récupérer le voting-app"
       ansible.builtin.git:
         repo: https://github.com/nomaddevops/voting-app.git
