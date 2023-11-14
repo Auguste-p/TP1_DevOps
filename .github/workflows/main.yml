@@ -83,7 +83,7 @@ jobs:
     steps:
       - name: Run packer init
         id: init
-        run: ls -la /home/runner/work/_temp/
+        run: ls -la /home/runner/work/_temp/github_workflow && packer init ..
 
       # - name: Run packer validate
       #   id: validate
