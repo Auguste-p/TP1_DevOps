@@ -13,7 +13,7 @@ source "docker" "ubuntu" {
 }
 
 build {
-  name    = "parcker-ubuntu"
+  name    = "packer-ubuntu"
   sources = [
     "source.docker.ubuntu"
   ]
