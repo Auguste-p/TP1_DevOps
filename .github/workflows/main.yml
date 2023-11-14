@@ -67,7 +67,8 @@ jobs:
 
   packer:
     runs-on: ubuntu-latest
-    name: Run Packer
+    name: Run Packer (init, validate, build)
+    needs: [run-linters, run-safety] 
     steps:
       - name: Checkout
         uses: actions/checkout@v3

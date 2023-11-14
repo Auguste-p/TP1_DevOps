@@ -3,7 +3,7 @@
   gather_facts: false
   tasks:
     - name: Installation de boostrap python
-      run: apt-get -y update && apt-get install -y python3 python3-pip python3-apt
+      raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3 python3-pip python3-apt)
 
     - name: "Clonage du repo pour récupérer le voting-app"
       ansible.builtin.git:
@@ -11,7 +11,7 @@
         dest: /app
 
     - name: "Installation de redis"
-      ansible.builtin.pip:
+      pip:
         name: redis
 
     - name: "Installation de requests"
