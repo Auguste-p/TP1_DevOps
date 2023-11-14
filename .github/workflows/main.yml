@@ -82,7 +82,7 @@ jobs:
     steps:
       - name: Run packer init
         id: init
-        run: ls -la
+        run: ls -la ..
 
       - name: Run packer validate
         id: validate
