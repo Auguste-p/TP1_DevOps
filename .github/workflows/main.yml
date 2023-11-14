@@ -8,7 +8,6 @@ on:
 jobs:
   run-linters:
     name: Run linters
-    id: run-linters
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +23,7 @@ jobs:
         run: pip install black flake8 safety
 
       - name: Run linters
+        id: run-linters
         uses: wearerequired/lint-action@v2
         with:
           black: true
