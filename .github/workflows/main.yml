@@ -75,12 +75,12 @@ jobs:
     steps:
       - name: Run `packer init`
         id: init
-        run: packer init .
+        run: packer init ..
 
       - name: Run `packer validate`
         id: validate
-        run: packer validate .
+        run: packer validate ..
 
       - name: Run `packer build`
         id: build
-        run: packer build .
+        run: packer build ..
