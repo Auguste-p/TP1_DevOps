@@ -68,19 +68,26 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+  packer_build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Packer build
+        uses: getsentry/packer-build-action@v1.9.1
+
   packer:
     name: Packer
     needs: [run-linters, run-safety] 
     runs-on: ubuntu-latest
     steps:
-      - name: Run `packer init`
+      - name: Run packer init
         id: init
-        run: packer init ..
+        run: ls -la
 
-      - name: Run `packer validate`
+      - name: Run packer validate
         id: validate
         run: packer validate ..
 
-      - name: Run `packer build`
+      - name: Run packer build
         id: build
         run: packer build ..
