@@ -42,6 +42,7 @@ jobs:
           python-version: 3.8
 
       - name: Install safety
+        id: run-linters
         run: pip install safety && safety check
 
   docker-buildx:
