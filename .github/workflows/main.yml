@@ -83,7 +83,7 @@ jobs:
     steps:
       - name: Run packer init
         id: init
-        run: ls -la /home
+        run: ls -la /home/runner/work/_temp/
 
       # - name: Run packer validate
       #   id: validate
