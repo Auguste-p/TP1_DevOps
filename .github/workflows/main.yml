@@ -47,6 +47,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Docker Scout
+        id: docker-scout
+        run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+
       # - name: Build and push
       #   uses: docker/build-push-action@v4
       #   with:
@@ -54,7 +58,3 @@ jobs:
       #     file: ./Dockerfile
       #     push: true
       #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-
-      # - name: Docker Scout
-      #   id: docker-scout
-      #   run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
