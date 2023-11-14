@@ -57,4 +57,4 @@ jobs:
 
       - name: Docker Scout
         id: docker-scout
-        run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+        run: docker scout ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
