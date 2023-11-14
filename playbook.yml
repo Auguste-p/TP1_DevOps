@@ -11,7 +11,7 @@
         dest: /app
 
     - name: "Installation de redis"
-      pip:
+      ansible.builtin.pip:
         name: redis
 
     - name: "Installation de requests"
