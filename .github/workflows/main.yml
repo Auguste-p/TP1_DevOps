@@ -82,12 +82,12 @@ jobs:
     steps:
       - name: Run packer init
         id: init
-        run: ls -la ../tp_note
+        run: ls -la /app/tp_note
 
-      - name: Run packer validate
-        id: validate
-        run: packer validate ..
+      # - name: Run packer validate
+      #   id: validate
+      #   run: packer validate ..
 
-      - name: Run packer build
-        id: build
-        run: packer build ..
+      # - name: Run packer build
+      #   id: build
+      #   run: packer build ..

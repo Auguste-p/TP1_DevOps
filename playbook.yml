@@ -20,3 +20,8 @@
     - name: "Installation de flask"
       ansible.builtin.pip:
         name: flask
+
+    - name: Copie des fichiers docker et playbook dans le container
+      ansible.builtin.copy:
+        src: ../
+        dest: /app
