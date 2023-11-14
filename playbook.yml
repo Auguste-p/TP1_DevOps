@@ -1,6 +1,5 @@
 - name: Provision Python
   hosts: all
-  gather_facts: false
   tasks:
     - name: Boostrap python
       raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3 python3-pip python3-apt)
@@ -8,10 +7,6 @@
 - name: "[SETUP] Installation de toutes les dépendances"
   hosts: all
   tasks:
-
-  - name: "Installation de tous les paquets"
-    package_facts:
-      manager: auto
 
   - name: "Installation de redis"
     ansible.builtin.pip:
