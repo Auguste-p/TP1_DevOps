@@ -9,13 +9,6 @@
         repo: https://github.com/nomaddevops/voting-app.git
         dest: /app
 
-    - name: "Expose port 80"
-      docker_container:
-        name: voting-app
-        image: python:3.8
-        ports: 80:80
-        become: true
-
     - name: "Installation de redis"
       ansible.builtin.pip:
         name: redis
@@ -27,6 +20,13 @@
     - name: "Installation de flask"
       ansible.builtin.pip:
         name: flask
+
+    - name: "Expose port 80"
+      docker_container:
+        name: voting-app
+        image: python:3.8
+        ports: 80:80
+        become: true
 
     - name: "Build and run Redis container"
       docker_container:
