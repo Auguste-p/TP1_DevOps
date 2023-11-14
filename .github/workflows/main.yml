@@ -68,23 +68,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-  # create-directory:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Create folder
-  #       run: mkdir /app && cp ../ /app
-
-  # packer:
-  #   name: Packer
-  #   needs: [run-linters, run-safety] 
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Run packer init
-  #       id: init
-  #       run: ls -la /home/runner/work/_temp/github_workflow && packer init ..
-
   packer:
     runs-on: ubuntu-latest
     name: Run Packer
