@@ -68,12 +68,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-  packer_build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Packer build
-        uses: getsentry/packer-build-action@v1.9.1
+  # packer_build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Packer build
+  #       uses: getsentry/packer-build-action@v1.9.1
 
   packer:
     name: Packer
@@ -82,7 +82,7 @@ jobs:
     steps:
       - name: Run packer init
         id: init
-        run: ls -la ..
+        run: ls -la ../tp_note
 
       - name: Run packer validate
         id: validate
