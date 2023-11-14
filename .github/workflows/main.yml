@@ -42,7 +42,7 @@ jobs:
           python-version: 3.8
 
       - name: Install setuptools
-        run: pip install setuptools
+        run: pip3 install --upgrade pip setuptools
 
       - name: Install safety
         id: run-safety
