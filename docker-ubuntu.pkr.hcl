@@ -2,7 +2,7 @@ packer {
   required_plugins {
     docker = {
       version = ">= 0.0.7"
-      source = "github.com/hashicorp/docker"
+      source  = "github.com/hashicorp/docker"
     }
   }
 }
@@ -13,12 +13,11 @@ source "docker" "ubuntu" {
 }
 
 build {
-  name    = "packer-ubuntu"
+  name = "packer-ubuntu"
   sources = [
     "source.docker.ubuntu"
   ]
+  provisioner "ansible" {
+    playbook_file = "./playbook.yml"
+  }
 }
-
-provisioner "ansible" {
-      playbook_file = "./playbook.yml"
-    }
